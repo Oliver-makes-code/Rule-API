@@ -9,6 +9,9 @@ import olivermakesco.de.rule.api.Rules;
 
 public class RuleCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+        try {
+            PropertiesFileIO.read();
+        } catch (Exception ignored) {}
         LiteralArgumentBuilder<ServerCommandSource> literal = LiteralArgumentBuilder.literal("rule");
         literal = literal.requires(ctx -> ctx.hasPermissionLevel(4));
         for (Identifier id : Rules.getIds()) {
@@ -19,6 +22,9 @@ public class RuleCommand {
                 LiteralArgumentBuilder<ServerCommandSource> valueLiteral = LiteralArgumentBuilder.literal(value.toString());
                 valueLiteral = valueLiteral.executes(ctx -> {
                     rule.setValue(value);
+                    try {
+                        PropertiesFileIO.write();
+                    } catch (Exception ignored) {}
                     ctx.getSource().sendFeedback(Text.of("Rule " + id.toString() + " now has value " + rule.getValue()), false);
                     return 0;
                 });

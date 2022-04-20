@@ -6,8 +6,8 @@
     "version": "${version}",
 
     "metadata": {
-      "name": "Example Mod",
-      "description": "This is an example description! Tell everyone what your mod is about!",
+      "name": "Rule API",
+      "description": "An API for registering rules into the game",
       "contributors": {
         "Oliver": "author"
       },

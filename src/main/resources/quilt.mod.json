@@ -1,0 +1,33 @@
+{
+  "schema_vrsion": 1,
+  "quilt_loader": {
+    "group": "olivermakesco.de",
+    "id": "rule_api",
+    "version": "${version}",
+
+    "metadata": {
+      "name": "Example Mod",
+      "description": "This is an example description! Tell everyone what your mod is about!",
+      "contributors": {
+        "Oliver": "author"
+      },
+
+      "license": "CC0-1.0"
+    },
+
+    "intermediate_mappings": "net.fabricmc:intermediary",
+
+    "depends": [
+      {
+        "id": "minecraft",
+        "version": ">=1.18.2"
+      }
+    ]
+  },
+
+  "mixin": [
+    "rule_api.mixins.json"
+  ]
+
+
+}

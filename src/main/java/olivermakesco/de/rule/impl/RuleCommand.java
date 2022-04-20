@@ -27,13 +27,19 @@ public class RuleCommand {
         context.getSource().sendFeedback(Text.of("Rule with name "+ruleName+" updated to value "+valueName+"."),true);
         return 0;
     }
+    public static int runWithoutValue(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        String ruleName = StringArgumentType.getString(context, "Rule");
+        Rule rule = getRule(ruleName);
+        context.getSource().sendFeedback(Text.of("Rule with name "+ruleName+" updated has value "+rule.getValue().getName()),false);
+        return 0;
+    }
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
                 CommandManager.literal("rule").then(
                         CommandManager.argument("Rule", StringArgumentType.string())
                                 .suggests((c,b) -> CommandSource.suggestMatching(getValues(),b))
-                                .executes(RuleCommand::run)
+                                .executes(RuleCommand::runWithoutValue)
                                 .then(
                                         CommandManager.argument("Value", StringArgumentType.string())
                                                 .suggests((c,b) -> CommandSource.suggestMatching(getValues(c),b))

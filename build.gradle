@@ -1,5 +1,6 @@
 plugins {
 	id 'org.quiltmc.loom' version '0.12.23'
+	id 'maven-publish'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -61,5 +62,18 @@ java {
 jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
+	}
+}
+
+publishing {
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = "https://maven.pkg.github.com/oliver-makes-code/rule-api"
+			credentials {
+				username = System.getenv("GITHUB_ACTOR")
+				password = System.getenv("GITHUB_TOKEN")
+			}
+		}
 	}
 }
